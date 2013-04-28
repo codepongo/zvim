@@ -362,7 +362,13 @@ endfunction
 if "" !=bufname("%")
 	cd %:h
 endif
-
+"pydiction
+if has("mac")
+	let g:pydiction_location=$HOME."/.vim/complete-dict"
+elseif has("win32")
+	let g:pydiction_location=$VIM."\\vimfiles\\complete-dict"
+endif
+set list	
 """""""""""""""""""
 """""some useful command"""""
 "read unicode in vim set encoding=utf-8

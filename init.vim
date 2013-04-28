@@ -81,6 +81,29 @@ with gzip.open('DrawItvba.gz') as gz:
 	vim.command('e init.vim')
 	os.remove('DrawIt.vba')
 
+#pydiction-1.2.1
+with zipfile.ZipFile('pydiction-1.2.1.zip') as z:
+	with zipfile.ZipFile('pydiction.zip', 'w') as t:
+		for i in z.namelist():
+			name = i.replace('pydiction-1.2.1', '')
+			if name[:-len('README.md')] == 'README.md' or name[:-len('README')] == 'README':
+				continue
+			b = z.read(i)
+			t.writestr(name, b)
+		t.close()
+	z.close()
+with zipfile.ZipFile('pydiction.zip') as t:
+	t.extractall(vimfiles_path)
+	t.close()
+	z.close()
+os.remove('pydiction.zip')
+
+	
+#snipMate
+with zipfile.ZipFile('snipMate.zip') as z:
+	z.extractall(vimfiles_path)
+	z.close()
+
 #taglist
 with zipfile.ZipFile('taglist_45.zip') as z:
 	z.extractall(vimfiles_path)
@@ -99,7 +122,7 @@ with zipfile.ZipFile('vim-powerline-develop.zip') as z:
 	with zipfile.ZipFile('vim-powerline.zip', 'w') as t:
 		for i in z.namelist():
 			name = i.replace('vim-powerline-develop', '')
-			if name == '.gitignore' or name == 'README.rst':
+			if  name[:-len('.gitignore')]  == '.gitignore' or name[:-len('README.rst')] == 'README.rst':
 				continue
 			b = z.read(i)
 			t.writestr(name, b)
@@ -109,6 +132,7 @@ with zipfile.ZipFile('vim-powerline.zip') as t:
 	t.extractall(vimfiles_path)
 	t.close()
 os.remove('vim-powerline.zip')
+
 #visualmark
 shutil.copyfile('visualmark.vim', vimfiles_path+os.sep+'plugin'+os.sep+'visualmark.vim')
 
@@ -117,6 +141,9 @@ with zipfile.ZipFile('winmanager.zip') as z:
 	z.extractall(vimfiles_path)
 	z.close()
 
+vim.command('helptags $VIMRUNTIME/doc')
+helptags_cmd = 'helptags ' + vimfiles_path + os.sep + 'doc'
+vim.command(helptags_cmd)
 vim.command('helptags $VIMRUNTIME/doc')
 vim.command('set noreadonly')
 print 'successful'
