@@ -30,7 +30,7 @@ else:
 shutil.copyfile('zuohaitao.vim', vim_path+own_vimrc)
 with open(vim_path+vimrc, 'r+') as f:
 	custom = 'source '+vim_path+own_vimrc
-	if custom != f.readlines()[-1]:
+	if custom.lower() != f.readlines()[-1][:-1].lower():
 		f.seek(0, 2)
 		f.write('source '+vim_path+own_vimrc)
 	f.close()	
