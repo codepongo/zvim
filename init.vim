@@ -141,10 +141,14 @@ with zipfile.ZipFile('winmanager.zip') as z:
 	z.extractall(vimfiles_path)
 	z.close()
 
+#visualmark
+shutil.copyfile('matrix.vim', vimfiles_path+os.sep+'plugin'+os.sep+'matrix.vim')
+
 vim.command('helptags $VIMRUNTIME/doc')
 helptags_cmd = 'helptags ' + vimfiles_path + os.sep + 'doc'
 vim.command(helptags_cmd)
 vim.command('helptags $VIMRUNTIME/doc')
 vim.command('set noreadonly')
 print 'successful'
+
 EOF
