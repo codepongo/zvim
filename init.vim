@@ -54,11 +54,7 @@ if vim.eval('has("win32")') == "1":
 
 # install plugins by name from 'A' to 'Z'
 
-#bufexplorer
-with zipfile.ZipFile('bufexplorer.zip') as z:
-	z.extractall(vimfiles_path)
-	z.close()
-
+# C ########
 #ctags.exe
 # becuase of $VIMRUNTIME is in the path envirment variable
 # you can run ctag.exe with '!ctags.exe'
@@ -70,6 +66,7 @@ with zipfile.ZipFile('ctrlp.zip') as z:
 	z.extractall(vimfiles_path)
 	z.close()
 
+# D ########
 #DrawIt
 with gzip.open('DrawItvba.gz') as gz:
 	with open('DrawIt.vba', 'wb') as vba:
@@ -81,6 +78,11 @@ with gzip.open('DrawItvba.gz') as gz:
 	vim.command('e init.vim')
 	os.remove('DrawIt.vba')
 
+# M ########
+#matrix
+shutil.copyfile('matrix.vim', vimfiles_path+os.sep+'plugin'+os.sep+'matrix.vim')
+
+# P ########
 #pydiction-1.2.1
 with zipfile.ZipFile('pydiction-1.2.1.zip') as z:
 	with zipfile.ZipFile('pydiction.zip', 'w') as t:
@@ -98,25 +100,21 @@ with zipfile.ZipFile('pydiction.zip') as t:
 	z.close()
 os.remove('pydiction.zip')
 
-	
+# S ########
 #snipMate
 with zipfile.ZipFile('snipMate.zip') as z:
 	z.extractall(vimfiles_path)
 	z.close()
 
-#taglist
-with zipfile.ZipFile('taglist_45.zip') as z:
+# T ########
+#tagbar
+with zipfile.ZipFile('tagbar.zip') as z:
 	z.extractall(vimfiles_path)
 	z.close()
-
 #tetris
 shutil.copyfile('tetris.vim', vimfiles_path+os.sep+'plugin'+os.sep+'tetris.vim')
 
-#txtbrowser
-with zipfile.ZipFile('txtbrowser-1.3.5.zip') as z:
-	z.extractall(vimfiles_path)
-	z.close()
-
+# P ########
 #powerline
 with zipfile.ZipFile('vim-powerline-develop.zip') as z:
 	with zipfile.ZipFile('vim-powerline.zip', 'w') as t:
@@ -133,22 +131,20 @@ with zipfile.ZipFile('vim-powerline.zip') as t:
 	t.close()
 os.remove('vim-powerline.zip')
 
+# V ########
 #visualmark
 shutil.copyfile('visualmark.vim', vimfiles_path+os.sep+'plugin'+os.sep+'visualmark.vim')
 
-#winmanager
-with zipfile.ZipFile('winmanager.zip') as z:
-	z.extractall(vimfiles_path)
-	z.close()
 
-#visualmark
-shutil.copyfile('matrix.vim', vimfiles_path+os.sep+'plugin'+os.sep+'matrix.vim')
+
 
 vim.command('helptags $VIMRUNTIME/doc')
 helptags_cmd = 'helptags ' + vimfiles_path + os.sep + 'doc'
 vim.command(helptags_cmd)
 vim.command('helptags $VIMRUNTIME/doc')
 vim.command('set noreadonly')
+
+
 print 'successful'
 
 EOF

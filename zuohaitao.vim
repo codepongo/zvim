@@ -204,7 +204,7 @@ let mapleader = ","
 "Plugin Setting 
 """"""""""""""""""""""""""""""
 
-" Tag list
+"ctags.exe path
 if has("win32")                "set ctags path in windows OS
 	let Tlist_Ctags_Cmd="\"".$VIM."\\ctags.exe\""
 elseif has("linux")              "set ctags path in linux OS
@@ -212,28 +212,25 @@ elseif has("linux")              "set ctags path in linux OS
 elseif has("mac")
 	let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 endif
-let Tlist_Show_One_File = 1	"show the current file tag ,not show the other files
-let Tlist_Exit_OnlyWindow = 1	"if taglist window is the last window exit the vim after the window is close.
-let  Tlist_Compact_Format = 1	"In compact display mode, do not display help
-" netrw setting
-nmap <silent> <leader>fe :Sexplore!<cr>
-let g:netrw_winsize = 30
-" BufExplorer
-let g:bufExplorerDefaultHelp=0       " Do not show default help.
-let g:bufExplorerShowRelativePath=1  " Show relative paths.
-let g:bufExplorerSortBy='mru'        " Sort by most recently used.
-let g:bufExplorerSplitRight=0        " Split left.
-let g:bufExplorerSplitVertical=1     " Split vertically.
-let g:bufExplorerSplitVertSize = 30  " Split width
-let g:bufExplorerUseCurrentWindow=1  " Open in new window.
-" winManager setting
-let g:winManagerWindowLayout = "TagList,BufExplorer,FileExplorer"
-let g:winManagerWidth = 30
-let g:defaultExplorer = 0
+"set ctags
+if (has("mac")|| has("linux"))
+	"$>cd /usr/include
+	"$>sudo ctags -R .
+	set tags+=/usr/include/tags
+elseif (has("win32"))
+	"cd $VIM
+	"ctag -R C:\Program Files\Microsoft Visual Studio 9.0\VC
+	"ctag -R C:\Program Files\Microsoft SDKs
+	let $T = $VIM
+	let $T = substitute($T, " ", "\\\\\\\\\\\\ ", "")
+	let $T = $VIM."\\tags"
+	set tags+=$T
+endif
 
-"""""""""""""keyboard map
-"IDE keyboard map
-nmap <silent><F1> :WMToggle<CR>
+"tagbar
+nmap <silent><F1> :TagbarToggle<CR>
+
+"comment
 function! z:comment()
 	if (s:cmfmt == "")
 		echo "file type dose not support comment."
@@ -328,20 +325,6 @@ function! z:cfc()
 endfunction
 map <silent><leader>fc :call z:cfc()<CR>a
 map <silent><leader>2h <ESC>:runtime syntax/2html.vim<ESC>:%s/\(<body.*\)/\1\r<br>\r<table width=100% bgcolor="#000000" border=1>\r<tr>\r<td><font color="#ffffff">\r<ESC>:%s/\(.*\)\(<\/body>\)/\1<\/font><\/td>\r<\/tr>\r<\/table>\r\2/<ESC>:wq<ESC>
-"set ctags
-if (has("mac")|| has("linux"))
-	"$>cd /usr/include
-	"$>sudo ctags -R .
-	set tags+=/usr/include/tags
-elseif (has("win32"))
-	"cd $VIM
-	"ctag -R C:\Program Files\Microsoft Visual Studio 9.0\VC
-	"ctag -R C:\Program Files\Microsoft SDKs
-	let $T = $VIM
-	let $T = substitute($T, " ", "\\\\\\\\\\\\ ", "")
-	let $T = $VIM."\\tags"
-	set tags+=$T
-endif
 
 "auto fill 
 filetype plugin indent on
