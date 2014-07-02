@@ -54,6 +54,9 @@ if vim.eval('has("win32")') == "1":
 
 # install plugins by name from 'A' to 'Z'
 
+# A ########
+shutil.copyfile('a.vim', vimfiles_path+os.sep+'plugin'+os.sep+'a.vim')
+
 # C ########
 #ctags.exe
 # becuase of $VIMRUNTIME is in the path envirment variable
