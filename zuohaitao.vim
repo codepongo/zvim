@@ -81,6 +81,13 @@ function! z:win32_unicode_file()
 		au QuickfixCmdPost make call z:QfMakeConv()
 		au TabEnter make call z:QfMakeConv()
 	endif
+	if (".xaml" == strpart(fn,len(fn)-5, 5))
+		set filetype=xml
+		set encoding=utf-8
+		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
+		au QuickfixCmdPost make call z:QfMakeConv()
+		au TabEnter make call z:QfMakeConv()
+	endif
 	if (".m" == strpart(fn,len(fn)-2, 2))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
