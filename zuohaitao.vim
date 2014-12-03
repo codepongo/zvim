@@ -176,6 +176,7 @@ set linespace=5	"linespace
 set number	"line number
 set imcmdline	"the Input Method is always	
 set laststatus=2 "always a status line
+set list
 if has("gui_running")
 	set cc=80 "ruller
 endif
@@ -266,16 +267,12 @@ function! z:uncomment()
 	endwhile
 endfunction
 let s:cmfmt=""
-au BufNewFile,BufRead, *.md set filetype=markdown
 au BufNewFile,BufRead, *.py	let s:cmfmt="#"
-au BufNewFile,BufRead, *.py call py:setting()
 au BufNewFile,BufRead, blog	let s:cmfmt="#"
-au BufNewFile,BufRead, blog call py:setting()
 au BufNewFile,BufRead, *.c,*.cpp,*.h,*.m	let s:cmfmt="//"
 au BufNewFile,BufRead, *.vim let s:cmfmt="\""
 au BufNewFile,BufRead, *.bat let s:cmfmt="REM "
 au BufNewFile,BufRead, *.sh let s:cmfmt="#"
-au BufNewFile,BufRead, *.m set filetype=objc
 "comment keyboard map
 if has("win32")
 	map <silent><C-K><C-C>	:call z:comment()<CR>
@@ -358,7 +355,14 @@ if has("mac")
 elseif has("win32")
 	let g:pydiction_location=$VIM."\\vimfiles\\complete-dict"
 endif
-set list	
+au BufNewFile,BufRead, *.md set filetype=markdown
+au BufNewFile,BufRead, *.py,blog call py:setting()
+au BufNewFile,BufRead, *.m set filetype=objc
+au BufNewFile,BufRead, *.json set tabstop=2 shiftwidth=2 sts=2 expandtab
+au BufNewFile,BufRead, *.json let s:cmfmt="//"
+au BufNewFile,BufRead, *.js set tabstop=2 shiftwidth=2 sts=2 expandtab
+au BufNewFile,BufRead, *.js let s:cmfmt="//"
+au BufNewFile,BufRead, *.html highlight Special guifg=#ffffff
 """""""""""""""""""
 """""some useful command"""""
 "read unicode in vim set encoding=utf-8
