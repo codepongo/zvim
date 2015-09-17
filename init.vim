@@ -51,6 +51,8 @@ if vim.eval('has("win32")') == "1":
 	if os.path.exists(lang):
 		shutil.rmtree(vim.eval('$VIMRUNTIME')+os.sep+'lang')
 
+shutil.copyfile('markdown.vim', vimfiles_path+os.sep+'syntax'+os.sep+'markdown.vim')
+
 
 # install plugins by name from 'A' to 'Z'
 
