@@ -22,10 +22,11 @@ elif vim.eval('has("mac")') == "1":
 	vimrc = '.vimrc'
 	own_vimrc = '.zuohaitao.vim'
 	root = '/'
-	vimfiles_path = os.path.join(vim_path +'.vim')
+	vimfiles_path = os.path.join(vim_path +'/.vim')
 else:
 	print 'unknow platform'
 	raise Exception('Error', 'unknow platform')
+print vimfiles_path
 vim_run_time = vim.eval('$VIMRUNTIME')
 #own vimrc
 own_vimrc = os.path.join(vim_path, own_vimrc)
@@ -55,7 +56,8 @@ if vim.eval('has("win32")') == "1":
 #fix the accessibility of the highlighted italic in markdown files
 after_syntax = os.path.join(os.path.join(vimfiles_path, 'after'),'syntax')
 if not os.path.exists(after_syntax):
-	os.mkdirs(after_syntax)
+	print after_syntax
+	os.makedirs(after_syntax)
 shutil.copyfile('markdown.vim', os.path.join(after_syntax, 'markdown.vim'))
 
 
@@ -148,7 +150,7 @@ shutil.copyfile('visualmark.vim', os.path.join(plugin, 'visualmark.vim'))
 
 
 
-"make manual
+#make manual
 vim.command('helptags $VIMRUNTIME/doc')
 helptags_cmd = 'helptags '+ os.path.join(vimfiles_path, 'doc')
 vim.command(helptags_cmd)

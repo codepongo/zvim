@@ -13,6 +13,8 @@
 "		2. Edit ~/.vimrc, add "source ~/.zuohaitao.vim"
 "	enjoy it
 " history
+"		2015/10/10
+"					compatible with mac vim 7.4
 "		2012/12/17
 "					the file that the name of is blog is a python file  
 "		2012/12/12	
@@ -60,87 +62,87 @@
 "
 ""			
 "Set character set
-function! z:QfMakeConv()
+function! s:QfMakeConv()
 	let qflist = getqflist()
 	for i in qflist
 		let i.text = iconv(i.text, "cp936", "utf-8")
 	endfor
 	call setqflist(qflist)
 endfunction
-function! z:win32_unicode_file()
+function! s:win32_unicode_file()
 	let fn = bufname("%") 
 	if (".reg" == strpart(fn,len(fn)-4, 4))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if (".xml" == strpart(fn,len(fn)-4, 4))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if (".xaml" == strpart(fn,len(fn)-5, 5))
 		set filetype=xml
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if (".m" == strpart(fn,len(fn)-2, 2))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if (".sln" == strpart(fn,len(fn)-4, 4))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if (".py" == strpart(fn,len(fn)-3, 3))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if ("blog" == strpart(fn,len(fn)-3, 3))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if (".cgi" == strpart(fn,len(fn)-4, 4))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if (".utf8.txt" == strpart(fn,len(fn)-9, 9))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if ("blog" == strpart(fn,len(fn)-4, 4))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if (".md" == strpart(fn, len(fn)-3, 3))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 	if (".markdown" == strpart(fn, len(fn)-9, 9))
 		set encoding=utf-8
 		set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
-		au QuickfixCmdPost make call z:QfMakeConv()
-		au TabEnter make call z:QfMakeConv()
+		au QuickfixCmdPost make call s:QfMakeConv()
+		au TabEnter make call s:QfMakeConv()
 	endif
 endfunction
 
@@ -149,7 +151,7 @@ if (has("linux")||has("mac"))
 	set fileencodings=ucs-bom,utf-8,cp936,big5,latin1
 	set ambiwidth=double
 elseif has("win32")
-	call z:win32_unicode_file()
+	call s:win32_unicode_file()
 	set encoding=utf-8
 endif
 
@@ -239,7 +241,7 @@ endif
 nmap <silent><F1> :TagbarToggle<CR>
 
 "comment
-function! z:comment()
+function! s:comment()
 	if (s:cmfmt == "")
 		echo "file type dose not support comment."
 		return
@@ -248,7 +250,7 @@ function! z:comment()
 	let l = substitute(l, "^", s:cmfmt, "")
 	call setline(".", l)
 endfunction
-function! z:uncomment()
+function! s:uncomment()
 	let l = getline(".")
 	let i = 0
 	while ( i < strlen(l))
@@ -275,13 +277,13 @@ au BufNewFile,BufRead, *.bat let s:cmfmt="REM "
 au BufNewFile,BufRead, *.sh let s:cmfmt="#"
 "comment keyboard map
 if has("win32")
-	map <silent><C-K><C-C>	:call z:comment()<CR>
-	map <silent><C-K><C-U>	:call z:uncomment()<CR>
+	map <silent><C-K><C-C>	:call s:comment()<CR>
+	map <silent><C-K><C-U>	:call s:uncomment()<CR>
 elseif has("mac")
-	map <M-k><M-c> :call z:comment()<CR>
-	map <M-k><M-u> :call z:uncomment()<CR>
+	map <M-k><M-c> :call s:comment()<CR>
+	map <M-k><M-u> :call s:uncomment()<CR>
 endif
-function! z:cfh()
+function! s:cfh()
 "comment file header ONLY support for C filetype!
 	let c = "/**"
 	call append(0, c)
@@ -306,8 +308,8 @@ function! z:cfh()
 	let p = [0, 3, 13, -1]
 	call setpos(".", p)
 endfunction
-map <silent><leader>fh :call z:cfh()<CR>a
-function! z:cfc()
+map <silent><leader>fh :call s:cfh()<CR>a
+function! s:cfc()
 "comment function ONLY support for C filetype!
 	let p = line(".") - 1
 	let c = "/**"
@@ -327,7 +329,7 @@ function! z:cfc()
 	let cp = [0, p+3, 8, -1]
 	call setpos(".", cp)
 endfunction
-map <silent><leader>fc :call z:cfc()<CR>a
+map <silent><leader>fc :call s:cfc()<CR>a
 map <silent><leader>2h <ESC>:runtime syntax/2html.vim<ESC>:%s/\(<body.*\)/\1\r<br>\r<table width=100% bgcolor="#000000" border=1>\r<tr>\r<td><font color="#ffffff">\r<ESC>:%s/\(.*\)\(<\/body>\)/\1<\/font><\/td>\r<\/tr>\r<\/table>\r\2/<ESC>:wq<ESC>
 
 "auto fill 
@@ -336,7 +338,7 @@ set completeopt=longest,menu
 "ctrl+x ctrl+o
 
 "set python ide
-function! py:setting()
+function! s:setting()
 	set expandtab
 	if has("mac")
 		map <F5> <ESC>:exe "!python3 %"<cr>
@@ -356,7 +358,7 @@ elseif has("win32")
 	let g:pydiction_location=$VIM."\\vimfiles\\complete-dict"
 endif
 au BufNewFile,BufRead, *.md set filetype=markdown
-au BufNewFile,BufRead, *.py,blog call py:setting()
+au BufNewFile,BufRead, *.py,blog call s:setting()
 au BufNewFile,BufRead, *.m set filetype=objc
 au BufNewFile,BufRead, *.json set tabstop=2 shiftwidth=2 sts=2 expandtab
 au BufNewFile,BufRead, *.json let s:cmfmt="//"
@@ -390,3 +392,4 @@ au BufNewFile,BufRead, *.html highlight Special guifg=#ffffff
 ":set noexpandtab
 ",fh add c file header comment
 ",fc add c file function comment
+"set cursorline / set nocursorline highline current line
