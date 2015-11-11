@@ -30,12 +30,19 @@ print vimfiles_path
 vim_run_time = vim.eval('$VIMRUNTIME')
 #own vimrc
 own_vimrc = os.path.join(vim_path, own_vimrc)
+print own_vimrc
 shutil.copyfile('zuohaitao.vim', own_vimrc)
+if not os.path.exists(os.path.join(vim_path, vimrc)):
+	with open(os.path.join(vim_path, vimrc), 'w') as f:
+		f.write('"vimrc\n')
+
 with open(os.path.join(vim_path, vimrc), 'r+') as f:
-	custom = 'source ' + own_vimrc
-	if custom[:-1].lower() != f.readlines()[-1][:-1].lower():
-		f.seek(0, 2)
-		f.write(custom)
+	lines = f.readlines()
+	if len(lines) != 0:
+		custom = 'source ' + own_vimrc
+		if custom[:-1].lower() != lines[-1][:-1].lower():
+			f.seek(0, 2)
+			f.write(custom)
 #save tmp files
 tmp = os.path.join(root, 'tmp')
 if not os.path.exists(tmp):
@@ -63,6 +70,9 @@ shutil.copyfile('markdown.vim', os.path.join(after_syntax, 'markdown.vim'))
 
 # install plugins by name from 'A' to 'Z'
 plugin = os.path.join(vimfiles_path, 'plugin')
+if not os.path.exists(plugin):
+	print plugin
+	os.makedirs(plugin)
 # A ########
 shutil.copyfile('a.vim', os.path.join(plugin, 'a.vim'))
 
